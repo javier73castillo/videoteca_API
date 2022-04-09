@@ -8,7 +8,7 @@ const app = express();
 connect();
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:4200'],
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app'],
     credentials: true
 }));
 app.use(express.json({ limit: '5mb' }))
