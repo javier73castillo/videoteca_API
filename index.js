@@ -7,6 +7,16 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 connect();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH')
+    res.header('Access-Control-Allow-Credentials', true)
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+    next()
+})
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app', 'https://videoteca-angular.vercel.app/estudio'],
+    credentials: true
+}));
 
 app.use(express.json({ limit: '5mb' }))
 
@@ -25,10 +35,7 @@ app.use('*', (req, res, next) => {
     return next(error);
 });
 
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app', 'https://videoteca-angular.vercel.app/estudio'],
-    credentials: true
-}));
+
 
 app.use((error, req, res, next) => {
     return res.status(error.status || 500).json(error.message || 'Unexpected error');
