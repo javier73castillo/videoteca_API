@@ -7,10 +7,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 connect();
 
-app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app', 'https://videoteca-angular.vercel.app/estudio'],
-    credentials: true
-}));
+
 app.use(express.json({ limit: '5mb' }))
 
 app.use(express.urlencoded({
@@ -27,6 +24,11 @@ app.use('*', (req, res, next) => {
     error.message = 'Route not found';
     return next(error);
 });
+
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app', 'https://videoteca-angular.vercel.app/estudio'],
+    credentials: true
+}));
 
 app.use((error, req, res, next) => {
     return res.status(error.status || 500).json(error.message || 'Unexpected error');
