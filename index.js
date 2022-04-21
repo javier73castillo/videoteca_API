@@ -14,7 +14,7 @@ app.use((req, res, next) => {
     next()
 })
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app', 'https://videoteca-angular.vercel.app/estudio'],
+    origin: ['http://localhost:3000', 'http://localhost:4200', 'https://videoteca-api.vercel.app', 'https://videoteca-angular.vercel.app'],
     credentials: true
 }));
 
